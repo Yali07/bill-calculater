@@ -1,0 +1,190 @@
+#: import C kivy.utils.get_color_from_hex
+
+<BillScreen>:
+	BoxLayout:
+		orientation: "vertical"
+		BoxLayout:
+			size_hint_y: None
+			height: 125
+			canvas.before:
+				Color:
+					rgba: (0,0,0,1)
+				Rectangle:
+					size: self.size
+					pos: self.pos
+			MDLabel:
+				text: "Antony Metals"
+				color: (1,0,0,1)
+				font_size: 40
+				bold: True
+				size_hint_x: .7
+			MDIconButton:
+				id: keyword_nav
+				icon: "note"
+				size_hint_x: .15
+				pos_hint: {"center_x":.5,"center_y": .5 }
+				theme_text_color: "Custom"
+				text_color: 1,0,0,1
+				user_font_size: "25sp"
+				state: "normal"
+				on_release:
+					root.parent.current = "keyword_screen"
+					
+					
+			MDIconButton:
+				id:icon
+				icon: "arrow-right-circle"
+				size_hint_x: .15
+				pos_hint: {"center_x":.5,"center_y": .5 }
+				theme_text_color: "Custom"
+				text_color: 1,0,0,1
+				user_font_size: "25sp"
+				on_release:
+					if root.parent.current_screen.name == "bill_screen": root.parent.current = "bill_screen2"  
+					else: root.parent.current = "bill_screen"
+					
+				on_press:
+					root.parent.ids.bill_screen2.ids.total_amount.text = root.ids.total_amount.text
+		MDSeparator:
+			height: 10
+		BoxLayout:
+			orientation: "horizontal"
+			size_hint_y: None
+			height: 70
+			pos_hint: {"top": 1}
+			canvas.before:
+				Color:
+					rgba: C("#000000")
+				Rectangle:
+					size: self.size
+					pos: self.pos
+			Label:
+				id: yahoo
+				size_hint_x: .4
+				text : "Product"
+				readonly: True
+				bold: True
+				halign: "center"
+				valign: "middle"
+			Label:
+				id: yahoo
+				size_hint_x: .175
+				text : "Rate"
+				readonly: True
+				bold: True
+				halign: "center"
+				valign: "middle"
+				color: (1,0,0,1)
+			Label:
+				size_hint_x: .175
+				text : "Weight"
+				readonly: True
+				bold: True
+				halign: "center"
+				valign: "middle"
+				color: (1,0,0,1)
+			Label:
+				size_hint_x: .25
+				text : "Amount"
+				readonly: True
+				bold: True
+				halign: "center"
+				valign: "middle"
+				color: (1,0,0,1)
+		MDSeparator:
+			height: 10
+		GridLayout:
+			cols: 1
+			id: billingfield
+			spacing: 5
+			BoxLayout:
+				size_hint_y: None
+				height: 50
+				pos_hint: {"top":1}
+				MDTextFieldRect:
+					id : product
+					size_hint_x :  .4
+					size_hint_y :None
+					pos_hint : {"top": 1}
+					multiline : False
+					height: 50
+					halign: "center"
+					valign : "middle"
+					allow_copy : False
+					on_double_tap:
+						root.billing_field()
+						root.total_amount1()
+					on_text_validate:
+						root.find_product_rate1()
+						root.calc_amount1()
+				MDTextFieldRect:
+					id: rate
+					text: "0.00"
+					size_hint_x :  .175
+					size_hint_y :None
+					pos_hint : {"top": 1}
+					multiline : False
+					height: 50
+					halign: "center"
+					valign : "middle"
+					allow_copy : False
+					on_double_tap:
+						root.billing_field()
+						root.total_amount1()
+					on_text_validate:
+						root.calc_amount1()
+				MDTextFieldRect:
+					id : weight
+					text: "1.00"
+					size_hint_x :  .175
+					size_hint_y :None
+					pos_hint : {"top": 1}
+					multiline : False
+					height: 50
+					halign: "center"
+					valign : "middle"
+					allow_copy : False
+					on_double_tap:
+						root.billing_field()
+						root.total_amount1()
+					on_text_validate:
+						root.calc_amount1()
+				MDTextFieldRect:
+					id : amount
+					text: "0.00"
+					size_hint_x :  .25
+					size_hint_y :None
+					pos_hint : {"top": 1}
+					multiline : False
+					height: 50
+					halign: "center"
+					valign : "middle"
+					readonly: True
+		BoxLayout:
+			orientation: "horizontal"
+			size_hint_y: .075
+			canvas.before:
+				Color:
+					rgba: C("#000000")
+				Rectangle:
+					size: self.size
+					pos: self.pos
+			Label:
+				size_hint_x: .7
+				text : "Total"
+				bold: True
+				halign: "center"
+				valign: "middle"
+				font_size: 40
+				color: (1,0,0,1)
+			Label:
+				id: total_amount
+				size_hint_x: .3
+				text : "0.00"
+				bold: True
+				halign: "center"
+				valign: "middle"
+				font_size: 40
+				color: (1,0,0,1)
+			
+						
