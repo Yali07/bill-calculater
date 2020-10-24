@@ -1,4 +1,4 @@
-# bill-calculater
+# bill-calculator
 
 Instructions:
 
